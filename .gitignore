@@ -161,3 +161,7 @@ cython_debug/
 
 # Trained model
 *.h5
+
+# Generated file
+src/model.pkl
+src/agg_table.csv
