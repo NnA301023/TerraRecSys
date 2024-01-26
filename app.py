@@ -22,6 +22,7 @@ def load_data(dataset_path: str = "./src/agg_table.csv") -> pd.DataFrame:
         merged_data = pd.merge(df_product, df_purchase, on='product_id', how='inner')
         merged_data = pd.merge(merged_data, df_customer, on='customer_id', how='inner')
         merged_data = merged_data.drop_duplicates().reset_index(drop=True)
+        merged_data['total_purchase'] = 1
         merged_data.to_csv(dataset_path, index=False)
         return merged_data
 
