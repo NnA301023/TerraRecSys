@@ -13,7 +13,9 @@ st.set_page_config(page_title="Terra Store Web AI", layout="wide")
 @st.cache(allow_output_mutation=True)
 def load_data(dataset_path: str = "./src/agg_table.csv") -> pd.DataFrame:
     try:
-        return pd.read_csv(dataset_path)
+        merged_data = pd.read_csv(dataset_path)
+        merged_data['total_purchase'] = 1
+        return merged_data
     except:
         print("[*] Joining Table on Server...")
         df_customer = pd.read_csv("./dataset/customer_interactions_synt.csv")
