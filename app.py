@@ -16,9 +16,9 @@ def load_data(dataset_path: str = "./src/agg_table.csv") -> pd.DataFrame:
         return pd.read_csv(dataset_path)
     except:
         print("[*] Joining Table on Server...")
-        df_customer = pd.read_csv("../dataset/customer_interactions_synt.csv")
-        df_product  = pd.read_csv("../dataset/product_details_synt.csv")
-        df_purchase = pd.read_csv("../dataset/purchase_history_synt.csv")
+        df_customer = pd.read_csv("./dataset/customer_interactions_synt.csv")
+        df_product  = pd.read_csv("./dataset/product_details_synt.csv")
+        df_purchase = pd.read_csv("./dataset/purchase_history_synt.csv")
         merged_data = pd.merge(df_product, df_purchase, on='product_id', how='inner')
         merged_data = pd.merge(merged_data, df_customer, on='customer_id', how='inner')
         merged_data = merged_data.drop_duplicates().reset_index(drop=True)
@@ -43,6 +43,7 @@ def load_model(model_path: str = "./src/model.pkl") -> object:
         knn_model = NearestNeighbors(n_neighbors=5, metric="euclidean")
         knn_model.fit(X)
         joblib.dump(knn_model, model_path)
+        return knn_model
 
 
 def cust_behaviour_viz(df: pd.DataFrame, cust_id: int) -> None:
